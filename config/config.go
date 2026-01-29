@@ -8,8 +8,8 @@ import (
 )
 
 type Config struct {
-	ServerPort string `mapstructure:"SERVER_PORT"`
-	DBConn     string `mapstructure:"DB_CONN"`
+	Port   string `mapstructure:"PORT"`
+	DBConn string `mapstructure:"DB_CONN"`
 }
 
 func Load() (*Config, error) {
@@ -21,7 +21,10 @@ func Load() (*Config, error) {
 		_ = viper.ReadInConfig()
 	}
 
-	var cfg Config
-	err := viper.Unmarshal(&cfg)
-	return &cfg, err
+	config := Config{
+		Port:   viper.GetString("PORT"),
+		DBConn: viper.GetString("DB_CONN"),
+	}
+
+	return &config, nil
 }
