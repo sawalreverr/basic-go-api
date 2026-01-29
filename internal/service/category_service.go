@@ -10,8 +10,8 @@ type CategoryService struct {
 	repo *repository.CategoryRepository
 }
 
-func NewCategoryService(r repository.CategoryRepository) *CategoryService {
-	return &CategoryService{repo: &r}
+func NewCategoryService(r *repository.CategoryRepository) *CategoryService {
+	return &CategoryService{repo: r}
 }
 
 func (s *CategoryService) GetByID(id string) (*model.Category, error) {
