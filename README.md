@@ -18,7 +18,7 @@ Implementation Category CRUD
 
 ## Task Session 2
 1. Pindah categories temen-temen ke layered architecture [DONE]
-2. Challange (Optional): Explore Join, tambah category_id ke table products, setiap product mempunyai kategory, dan ketika Get Detail return category.name dari product. [TODO]
+2. Challange (Optional): Explore Join, tambah category_id ke table products, setiap product mempunyai kategory, dan ketika Get Detail return category.name dari product. [DONE]
 
 ## How to Run
 
