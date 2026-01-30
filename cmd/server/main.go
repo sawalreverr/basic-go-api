@@ -22,21 +22,27 @@ func main() {
 	if err != nil {
 		log.Fatalf("failed to connect to database: %v", err)
 	}
+	defer db.Close()
 
 	// init repository
 	categoryRepo := repository.NewCategoryRepository(db)
+	productRepo := repository.NewProductRepository(db)
 
 	// init service
 	categoryService := service.NewCategoryService(categoryRepo)
+	productService := service.NewProductService(productRepo)
 
 	// init handler
 	categoryHandler := handler.NewCategoryHandler(categoryService)
+	productHandler := handler.NewProductHandler(productService)
 
 	// setup router
 	mux := http.NewServeMux()
 
 	mux.HandleFunc("/categories", categoryHandler.Categories)
 	mux.HandleFunc("/categories/", categoryHandler.CategoryByID)
+	mux.HandleFunc("/products", productHandler.Products)
+	mux.HandleFunc("/products/", productHandler.ProductByID)
 
 	log.Printf("Server running on port %s", cfg.Port)
 	if err := http.ListenAndServe(":"+cfg.Port, mux); err != nil {
